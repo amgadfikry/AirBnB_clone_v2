@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Create a special storage instance for your application"""
+"""this  module instantiates an object of class FileStorage"""
+from os import getenv
 
-from os import environ
 
 req_storage = getenv("HBNB_TYPE_STORAGE")
 
