@@ -31,7 +31,7 @@ content=$(cat << 'END HEREDOC'
 		location / {
 			try_files $uri $uri/ =404;
 		}
-		location /hbnb_static/ {
+		location /hbnb_static {
 			alias /data/web_static/current/;
 		}
 	}
