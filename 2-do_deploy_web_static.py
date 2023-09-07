@@ -5,11 +5,12 @@ import os
 
 
 env.hosts = ["54.237.107.99", "100.25.103.38"]
+env.user = "ubuntu"
 
 
 def do_deploy(archive_path):
     """function that deploy the archive file """
-    if os.path.isfile(archive_path) is False:
+    if os.path.exists(archive_path) is False:
         return False
     try:
         put(archive_path, "/tmp")
