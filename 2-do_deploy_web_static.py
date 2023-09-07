@@ -8,6 +8,18 @@ env.hosts = ["54.237.107.99", "100.25.103.38"]
 env.user = "ubuntu"
 
 
+def do_pack():
+    """ function that compress static web folder"""
+    n = datetime.now()
+    t = f"web_static_{n.year}{n.month}{n.day}{n.hour}{n.minute}{n.second}.tgz"
+    local("mkdir -p versions")
+    with lcd("./versions"):
+        res = local(f"tar -czvf {t} ../web_static")
+        if res.succeeded:
+            return f"versions/{t}"
+    return None
+
+
 def do_deploy(archive_path):
     """function that deploy the archive file """
     if os.path.exists(archive_path) is False:
