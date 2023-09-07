@@ -31,21 +31,21 @@ def do_deploy(archive_path):
     file_name = archive_path.split("/")[-1]
     remote_path = f"/tmp/{file_name}"
     with cd("/data/web_static/releases/"):
-        res = sudo(f"tar -xzvf {remote_path}")
+        res = run(f"tar -xzvf {remote_path}")
         if res.failed:
             return False
-    res = sudo(f"rm {remote_path}")
+    res = run(f"rm {remote_path}")
     if res.failed:
         return False
-    res = sudo("rm /data/web_static/current")
+    res = run("rm /data/web_static/current")
     if res.failed:
         return False
     folder_old = "/data/web_static/releases/web_static"
     folder_new = f"/data/web_static/releases/{file_name.split('.')[0]}"
-    res = sudo(f"mv {folder_old} {folder_new}")
+    res = run(f"mv {folder_old} {folder_new}")
     if res.failed:
         return False
-    res = sudo(f"ln -s {folder_new} /data/web_static/current")
+    res = run(f"ln -s {folder_new} /data/web_static/current")
     if res.failed:
         return False
     return True
