@@ -4,9 +4,6 @@ from fabric.api import *
 from datetime import datetime
 import os
 
-env.hosts = ["54.237.107.99", "100.25.103.38"]
-env.user = "ubuntu"
-
 
 def do_pack():
     """ function that compress static web folder"""
