@@ -19,6 +19,8 @@ def do_pack():
         if res.succeeded:
             return f"versions/{t}"
     return None
+
+
 def do_deploy(archive_path):
     """function that deploy the archive file """
     if not os.path.exists(archive_path):
