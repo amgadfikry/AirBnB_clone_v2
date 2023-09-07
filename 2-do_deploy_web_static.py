@@ -10,7 +10,7 @@ env.user = "ubuntu"
 
 def do_deploy(archive_path):
     """function that deploy the archive file """
-    if not os.path.exists(archive_path):
+    if os.path.isfile(archive_path) is False:
         return False
     res = put(local_path=archive_path, remote_path="/tmp/")
     if res.failed:
