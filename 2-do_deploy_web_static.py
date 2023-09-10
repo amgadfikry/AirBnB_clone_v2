@@ -12,7 +12,8 @@ env.user = "ubuntu"
 def do_pack():
     """ function that compress static web folder"""
     n = datetime.now()
-    t = "web_static_.tgz".format(n.year, n.month, n.day, n.hour, n.minute, n.second)
+    t = "web_static_.tgz".format(
+            n.year, n.month, n.day, n.hour, n.minute, n.second)
     local("mkdir -p versions")
     with lcd("./versions"):
         res = local("tar -czvf {} ../web_static".format(t))
@@ -49,6 +50,7 @@ def change(cmd, archive_path):
 
     print("New version deployed!")
     return True
+
 
 def do_deploy(archive_path):
     """function that deploy the archive file """
