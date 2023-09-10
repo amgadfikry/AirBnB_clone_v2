@@ -7,7 +7,6 @@ import os
 
 env.hosts = ["54.237.107.99", "100.25.103.38"]
 env.user = "ubuntu"
-x = 0
 
 
 def do_pack():
@@ -57,21 +56,22 @@ def do_deploy(archive_path):
     """function that deploy the archive file """
     if not os.path.exists(archive_path):
         return False
-    if x != 0:
-        res = put(local_path=archive_path, remote_path="/tmp/")
-        if res.failed:
-            return False
-        res = change(sudo, archive_path)
-        if res is False:
-            return False
-    else:
+
+    x = os.getenv("x", None)
+    if x is None:
         res = local("cp {} /tmp/".format(archive_path))
         if res.failed:
             return False
         res = change(local, archive_path)
         if res is False:
             return False
-        x = 1
+        os.environ["x"] = "remote"
+    res = put(local_path=archive_path, remote_path="/tmp/")
+    if res.failed:
+        return False
+    res = change(sudo, archive_path)
+    if res is False:
+        return False
 
     return True
     print("success")
