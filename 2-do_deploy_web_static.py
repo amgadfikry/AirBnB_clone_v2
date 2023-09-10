@@ -5,8 +5,9 @@ from datetime import datetime
 import os
 
 
-env.hosts = ["local", "54.237.107.99", "100.25.103.38"]
+env.hosts = ["54.237.107.99", "100.25.103.38"]
 env.user = "ubuntu"
+x = 0
 
 
 def do_pack():
@@ -56,7 +57,7 @@ def do_deploy(archive_path):
     """function that deploy the archive file """
     if not os.path.exists(archive_path):
         return False
-    if env.host_string != "local":
+    if x != 0:
         res = put(local_path=archive_path, remote_path="/tmp/")
         if res.failed:
             return False
@@ -70,6 +71,7 @@ def do_deploy(archive_path):
         res = change(local, archive_path)
         if res is False:
             return False
+        x = 1
 
     return True
     print("success")
