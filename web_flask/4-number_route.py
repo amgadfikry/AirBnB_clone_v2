@@ -36,6 +36,7 @@ def python(text):
 
 @app.route('/number/<int:n>')
 def number(n):
+    """ number route function """
     return "{} is a number".format(n)
 
 
