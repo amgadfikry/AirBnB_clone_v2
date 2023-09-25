@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+""" web app flask to route all cities in list """
+from flask import Flask, render_template
+from models import storage
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.user import User
+
+
+app = Flask(__name__)
+app.url_map.strict_slashes = False
+
+
+@app.teardown_appcontext
+def close(self):
+    """ function run when script is end """
+    storage.close()
+
+
+@app.route('/hbnb')
+def states():
+    """ function that get all states route """
+    state = storage.all(State)
+    amenity = storage.all(Amenity)
+    place = storage.all(Place)
+    user = storage.all(User)
+    return render_template("100-hbnb.html", state=state, amenity=amenity, place=place, user=user)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
